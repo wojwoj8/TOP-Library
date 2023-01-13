@@ -1,4 +1,16 @@
 .title{
-    
     text-align: center;
 }
+button{
+    align-items: center;
+}
+.form{
+    /* width:60vw; */
+}
+.elem{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+

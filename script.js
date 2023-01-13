@@ -9,12 +9,22 @@ function Book(author, title, numberOfPages, read){
 }
 
 function addBookToLibrary(){
-    //fds
+    document.querySelector("#add").addEventListener('click', () => {
+        console.log("test");
+        form.style.display = "none";
+    })
 }
+
+document.querySelector("#add").addEventListener('click', () => {
+    //console.log("test");
+    form.style.display = "block";
+})
+
 const book1 = new Book('autor', 'ksiazka', "2137", 'True');
 const book2 = new Book('autodfsr', 'ksiazasdka', "21", 'False');
 myLibrary.push(book1);
 myLibrary.push(book2);
+const form = document.querySelector(".form");
 //console.log(myLibrary);
 const tableBody = document.querySelector('tbody');
 
