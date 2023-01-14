@@ -31,30 +31,33 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
             <button type="button" id="add" class="btn btn-secondary mx-auto">Add book</button>
         </div>
-        <form>
-            <div class="form" style="display:true">
-                <form action="index.html" method="POST">
-                    <div class="elem">
-                        <label for="author">Author</label>
-                        <input type="text" name="author" required>
-                    </div>
-                    <div class="elem">
-                        <label for="title">Title</label>
-                        <input type="text" name="title" required>
-                    </div>
-                    <div class="elem">
-                        <label for="number">Number of Pages</label>
-                        <input type="number" name="number" minlength="1" required>
-                    </div>
-                    <div class="elem">
-                        <label for="read">Read</label>
-                        <select name="read" id="read">
-                            <option value="True">True</option>
-                            <option value="False">False</option>
-                    </div>
-                </form>
-            </div>
-        </form>
+        <div class="form" style="display:true">
+            <form action="index.html" method="POST">
+                <div class="elem">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" required>
+                </div>
+                <div class="elem">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" required>
+                </div>
+                <div class="elem">
+                    <label for="number">Number of Pages</label>
+                    <input type="number" name="number" minlength="1" required>
+                </div>
+                <div class="elem">
+                    <label for="read">Read</label>
+                    <select name="read" id="read">
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <button type="submit" id="sub" class="btn btn-secondary mx-auto" style="margin-top:20px">Add book</button>
+                </div>
+            </form>
+            
+        </div>
     </div>
 </body>
 
