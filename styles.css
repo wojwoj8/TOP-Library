@@ -13,4 +13,6 @@ button{
     flex-direction: column;
     
 }
-
+tr > button{
+    background-color: #6c757d !important;
+}
