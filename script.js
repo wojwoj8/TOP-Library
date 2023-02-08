@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
-/* eslint-disable no-plusplus */
 const myLibrary = [];
 const form = document.querySelector('.form');
 const tableBody = document.querySelector('tbody');
 const submit = document.querySelector('#sub');
 const inputs = document.querySelectorAll('input');
+const row = document.createElement('tr');
+const butt = document.createElement('button');
 
 function Book(author, title, numberOfPages, read) {
   this.author = author;
@@ -13,24 +14,16 @@ function Book(author, title, numberOfPages, read) {
   this.read = read;
 }
 
-function loop() {
-  const row = document.createElement('tr');
-  const butt = document.createElement('button');
-  butt.innerHTML = 'Remove';
-  butt.setAttribute('class', 'btn btn-secondary mx-auto', 'type', 'button');
-  butt.dataset.num = myLibrary.length - 1;
-  tableBody.appendChild(row).innerHTML = `<td>${myLibrary[myLibrary.length - 1].author}</td>
-         <td>${myLibrary[myLibrary.length - 1].title}</td>
-         <td>${myLibrary[myLibrary.length - 1].numberOfPages}</td>
-         <td>${myLibrary[myLibrary.length - 1].read}</td>`;
-  row.appendChild(butt);
-  document.querySelectorAll('[data-num]');
-  // console.log(myLibrary[myLibrary.length - 1]);
-}
-// submit.addEventListener('click', addBookToLibrary, false);
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-});
+Book.prototype.info = function () {
+  let readStatus;
+  if (this.read === false) {
+    readStatus = 'not read yet';
+  } else {
+    readStatus = 'has been read';
+  }
+  console.log(`${this.title} by ${this.author} ${this.numberOfPages} pages ${readStatus}`);
+};
+
 function addBookToLibrary() {
   // eslint-disable-next-line consistent-return
   submit.addEventListener('click', () => {
@@ -54,31 +47,9 @@ function addBookToLibrary() {
     console.log('stworzono obiekt');
 
     myLibrary.push(book);
-    loop();
-    // form.style.display = 'none';
-    // event.preventDefault();
-    // return false;
   });
 }
 
 document.querySelector('#add').addEventListener('click', addBookToLibrary());
-
-// const book1 = new Book('autor', 'ksiazka', '2137', 'True');
-
-if ((myLibrary.length) === 0) {
-  const book1 = new Book('autor', 'ksiazka', '2137', 'True');
-  console.log('dzoa;a');
-  myLibrary.push(book1);
-  loop();
-}
-
-console.log(document.querySelectorAll('[data-num]'));
-document.querySelectorAll('[data-num]').forEach((elem) => elem.addEventListener('click', () => {
-  let tabNum = elem.dataset.num;
-  tabNum = Number(tabNum);
-  myLibrary.splice(tabNum, 1);
-  console.log(elem);
-  console.log(elem.parentElement);
-  elem.parentElement.remove();
-  console.log(myLibrary);
-}));
+myLibrary.push(new Book('Tolkien', 'Hobbit', 342, false));
+myLibrary.push(new Book('J.R.R. Tolkien', 'TLoTR', 1242, true));
