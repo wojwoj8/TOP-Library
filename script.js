@@ -6,6 +6,7 @@ const tableBody = document.querySelector('tbody');
 const submit = document.querySelector('#sub');
 const inputs = document.querySelectorAll('input');
 const butt = document.createElement('button');
+const parent = document.querySelector('tbody');
 
 function Book(author, title, numberOfPages, read) {
   this.author = author;
@@ -16,7 +17,7 @@ function Book(author, title, numberOfPages, read) {
 
 Book.prototype.info = function () {
   let readStatus;
-  if (this.read === false) {
+  if (this.read === 'False') {
     readStatus = 'not read yet';
   } else {
     readStatus = 'has been read';
@@ -25,19 +26,19 @@ Book.prototype.info = function () {
 };
 
 function loop() {
-  // butt.innerHTML = 'Remove';
-  // butt.setAttribute('class', 'btn btn-secondary mx-auto', 'type', 'button');
-  // butt.dataset.num = myLibrary.length - 1;
-  for (let i = 0; i < myLibrary.length; i++) {
+  let i = 0;
+  removeTable();
+  for (i; i < myLibrary.length; i++) {
+    butt.dataset.num = i;
     tableBody.appendChild(document.createElement('tr')).innerHTML = `<td>${myLibrary[i].author}</td>
     <td>${myLibrary[i].title}</td>
     <td>${myLibrary[i].numberOfPages}</td>
-    <td>${myLibrary[i].read}</td>`;
-  }
+    <td><button class="btn btn-secondary mx-auto" id="readButton" data-attribute = ${i}>${myLibrary[i].read}</button></td>
+    <td><button class="btn btn-secondary mx-auto" id="remove" data-attribute = ${i}>Remove</button></td>`;
 
-  // row.appendChild(butt);
-  // document.querySelectorAll('[data-num]');
-  // console.log(myLibrary[myLibrary.length - 1]);
+    // console.log(myLibrary[i]);
+  }
+  removeBook();
 }
 // submit.addEventListener('click', addBookToLibrary, false);
 form.addEventListener('submit', (event) => {
@@ -67,15 +68,38 @@ function addBookToLibrary() {
     console.log('stworzono obiekt');
 
     myLibrary.push(book);
-    tableBody.appendChild(document.createElement('tr')).innerHTML = `<td>${book.author}</td>
-    <td>${book.title}</td>
-    <td>${book.numberOfPages}</td>
-    <td>${book.read}</td>`;
+    loop();
   });
 }
-
+function getRemButt() {
+  const r = document.querySelectorAll('#remove');
+  return r;
+}
+function removeTable() {
+  const r = getRemButt();
+  r.forEach((e, index) => {
+    console.log(index);
+    r[index].parentElement.parentElement.remove();
+  });
+}
+function removeBook() {
+  const r = getRemButt();
+  r.forEach((e, index) => e.addEventListener('click', () => {
+    console.log(index);
+    r[index].parentElement.parentElement.remove();
+    myLibrary.unshift(myLibrary.splice(index, 1)[0]);
+    myLibrary.shift();
+    while (parent.firstChild) {
+      parent.firstChild.remove();
+    }
+    // console.log('test');
+    loop();
+    // removeBook();
+  }));
+}
 document.querySelector('#add').addEventListener('click', addBookToLibrary());
-myLibrary.push(new Book('Tolkien', 'Hobbit', 342, false));
-myLibrary.push(new Book('J.R.R. Tolkien', 'TLoTR', 1242, true));
-myLibrary.push(new Book('Tesr', 'asd', 1234, false));
+myLibrary.push(new Book('Tolkien', 'Hobbit', 342, 'False'));
+myLibrary.push(new Book('J.R.R. Tolkien', 'TLoTR', 1242, 'True'));
+myLibrary.push(new Book('Tesr', 'asd', 1234, 'False'));
 loop();
+// removeBook();
