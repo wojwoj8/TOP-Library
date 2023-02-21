@@ -8,13 +8,14 @@ const inputs = document.querySelectorAll('input');
 const butt = document.createElement('button');
 const parent = document.querySelector('tbody');
 
-function Book(author, title, numberOfPages, read) {
-  this.author = author;
-  this.title = title;
-  this.numberOfPages = numberOfPages;
-  this.read = read;
+class Book {
+  constructor(author, title, numberOfPages, read) {
+    this.author = author;
+    this.title = title;
+    this.numberOfPages = numberOfPages;
+    this.read = read;
+  }
 }
-
 Book.prototype.info = function () {
   let readStatus;
   if (this.read === 'False') {
@@ -22,7 +23,7 @@ Book.prototype.info = function () {
   } else {
     readStatus = 'has been read';
   }
-  // console.log(`${this.title} by ${this.author} ${this.numberOfPages} pages ${readStatus}`);
+  console.log(`${this.title} by ${this.author} ${this.numberOfPages} pages ${readStatus}`);
 };
 
 function loop() {
